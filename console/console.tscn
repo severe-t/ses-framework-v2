@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://lvu5lukynfbv"]
+
+[ext_resource type="Script" uid="uid://budltrqncjyur" path="res://console/console_frontend.gd" id="1_42x45"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sjluo"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_42x45"]
+content_margin_left = 16.0
+content_margin_right = 16.0
+bg_color = Color(0.0142752165, 0.014275218, 0.014275218, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.15247646, 0.15247649, 0.15247634, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sjluo"]
+
+[node name="Console" type="CanvasLayer" unique_id=199760045]
+layer = 99
+script = ExtResource("1_42x45")
+
+[node name="Control" type="Control" parent="." unique_id=1388966768]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1979561953]
+clip_contents = true
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.7
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=258425497]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.7
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=2050582184]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TextField" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=548974599]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_sjluo")
+bbcode_enabled = true
+text = "Severi's Essential Systems Framework
+Version 0.3.1
+Severe Entertainment - All lefts deserved
+"
+scroll_following = true
+scroll_following_visible_characters = true
+selection_enabled = true
+
+[node name="SuggestionPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=2141005562]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="SuggestionList" type="ItemList" parent="MarginContainer/VBoxContainer/SuggestionPanel" unique_id=967739519]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer" unique_id=114883547]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_constants/caret_width = 4
+theme_override_constants/minimum_character_width = 4
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_42x45")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_sjluo")
+keep_editing_on_text_submit = true
+emoji_menu_enabled = false
+caret_blink = true
+caret_blink_interval = 0.25
+
+[connection signal="text_changed" from="MarginContainer/VBoxContainer/LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="text_submitted" from="MarginContainer/VBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]

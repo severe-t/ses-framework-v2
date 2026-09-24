@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://i1lovv2mvlt8"]
+
+[ext_resource type="Script" uid="uid://fhljfx408xc" path="res://main/sestem.gd" id="1_jkc55"]
+[ext_resource type="Script" uid="uid://c8lip0e3i2cng" path="res://modules/ses_telemetry.gd" id="2_45rq8"]
+[ext_resource type="PackedScene" uid="uid://lvu5lukynfbv" path="res://console/console.tscn" id="2_cgh6n"]
+[ext_resource type="Script" uid="uid://rpr5tmjj452k" path="res://modules/ses_file_saver.gd" id="3_cddg2"]
+[ext_resource type="Script" uid="uid://brs6yn1qhuod3" path="res://modules/ses_time.gd" id="4_xpbjy"]
+[ext_resource type="Script" uid="uid://d2ipibmcj146c" path="res://modules/ses_variable_converter.gd" id="5_2q2ob"]
+[ext_resource type="Script" uid="uid://lm1oii6as26s" path="res://console/console_backend.gd" id="7_cddg2"]
+
+[sub_resource type="Resource" id="Resource_g3038"]
+script = ExtResource("2_45rq8")
+metadata/_custom_type_script = "uid://c8lip0e3i2cng"
+
+[sub_resource type="Resource" id="Resource_k1ecy"]
+script = ExtResource("3_cddg2")
+metadata/_custom_type_script = "uid://rpr5tmjj452k"
+
+[sub_resource type="Resource" id="Resource_qfxm5"]
+script = ExtResource("4_xpbjy")
+metadata/_custom_type_script = "uid://brs6yn1qhuod3"
+
+[sub_resource type="Resource" id="Resource_dhojj"]
+script = ExtResource("5_2q2ob")
+metadata/_custom_type_script = "uid://d2ipibmcj146c"
+
+[sub_resource type="Resource" id="Resource_xpbjy"]
+script = ExtResource("7_cddg2")
+metadata/_custom_type_script = "uid://lm1oii6as26s"
+
+[node name="SesFramework" type="Node" unique_id=1439485840]
+script = ExtResource("1_jkc55")
+telemetry = SubResource("Resource_g3038")
+file_saver = SubResource("Resource_k1ecy")
+time = SubResource("Resource_qfxm5")
+varcon = SubResource("Resource_dhojj")
+
+[node name="Console" parent="." unique_id=199760045 instance=ExtResource("2_cgh6n")]
+visible = false
+backend = SubResource("Resource_xpbjy")
