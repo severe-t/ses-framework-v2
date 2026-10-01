@@ -7,12 +7,13 @@
 [ext_resource type="Script" uid="uid://brs6yn1qhuod3" path="res://modules/ses_time.gd" id="4_xpbjy"]
 [ext_resource type="Script" uid="uid://d2ipibmcj146c" path="res://modules/ses_variable_converter.gd" id="5_2q2ob"]
 [ext_resource type="Script" uid="uid://lm1oii6as26s" path="res://console/console_backend.gd" id="7_cddg2"]
+[ext_resource type="Script" uid="uid://d0ahubgwdoipf" path="res://console/console_command.gd" id="7_xpbjy"]
 
 [sub_resource type="Resource" id="Resource_g3038"]
 script = ExtResource("2_45rq8")
 metadata/_custom_type_script = "uid://c8lip0e3i2cng"
 
-[sub_resource type="Resource" id="Resource_k1ecy"]
+[sub_resource type="Resource" id="Resource_2q2ob"]
 script = ExtResource("3_cddg2")
 metadata/_custom_type_script = "uid://rpr5tmjj452k"
 
@@ -31,10 +32,9 @@ metadata/_custom_type_script = "uid://lm1oii6as26s"
 [node name="SesFramework" type="Node" unique_id=1439485840]
 script = ExtResource("1_jkc55")
 telemetry = SubResource("Resource_g3038")
-file_saver = SubResource("Resource_k1ecy")
+file = SubResource("Resource_2q2ob")
 time = SubResource("Resource_qfxm5")
 varcon = SubResource("Resource_dhojj")
 
 [node name="Console" parent="." unique_id=199760045 instance=ExtResource("2_cgh6n")]
-visible = false
 backend = SubResource("Resource_xpbjy")

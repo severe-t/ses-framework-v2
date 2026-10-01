@@ -1,8 +1,19 @@
 extends Node
 class_name Sestem
+"""
+Rules:
+	- The purpose of this architecture is to keep Sestem easy to expand and edit, not to make every module work independently.
+	- Modules should not be dependent on each other.
+	- Error handling should be handled by Sestem if possible.
+	- Return variables should always be types if possible. (Exceptions include variable converion functions.)
+	- All internal functions of a module or the the whole framework should always be prefixed with a '_'.
+
+"""
+
+
 
 @export var telemetry: SesTelemetry
-@export var file_saver: SesFileSaver
+@export var file: SesFileSaver
 @export var time: SesTime
 @export var varcon: SesVarConverter
 
@@ -10,10 +21,10 @@ class_name Sestem
 
 func out(source, color: Color,...text):
 	if telemetry:
-		telemetry.out.call(source, color, text)
+		print_to_console(telemetry.out_from_arr.call(source, color, text))
 
 func print_to_console(text: String):
-	console.print_text(text)
+	console._print_text(text)
 
 func wait(seconds: float):
 	await get_tree().create_timer(seconds).timeout

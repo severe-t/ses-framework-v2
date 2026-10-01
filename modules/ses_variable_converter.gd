@@ -9,27 +9,26 @@ enum SortOrder{
 }
 
 
-func auto_match(callable: Callable, ...args):#	Does NOT support Arrays or Dictionaries!
-	auto_match_arr(callable, args)
+func auto_match(callable: Callable, ...args) -> bool:#	Does NOT support Arrays or Dictionaries!
+	return auto_match_arr(callable, args)
 
 
-func auto_match_arr(callable: Callable, args: Array):
+func auto_match_arr(callable: Callable, args: Array)-> bool:
 	var types = get_arg_types(callable)
 	if args.size() < get_required_arg_count(callable):
-		return
+		return false
 	var margs = match_array(args, types)
-	if margs == null:
-		return
+	if margs.is_empty():
+		return false
 	callable.callv(margs)
-	
+	return true
 
-func match_args(callable: Callable, ...args):
+
+func match_args(callable: Callable, ...args) -> Array:
 	var types = get_arg_types(callable)
 	if args.size() < get_required_arg_count(callable):
-		return null
+		return []
 	var margs = match_array(args, types)
-	if margs == null:
-		return null
 	return margs
 
 
@@ -45,7 +44,6 @@ func get_arg_types(callable: Callable) -> Array:
 			for arg in method["args"]:
 				types.append(arg["type"] as Variant.Type)
 				break
-
 	return types
 
 
@@ -99,23 +97,26 @@ func convert_type_strict(input, wanted_type: int):
 	return null
 
 
-func match_array(args: Array, types: Array):
+func match_array(args: Array, types: Array) -> Array:
 	if args.size() > types.size():
-		return null
+		return []
 	var result: Array
 	for i in args.size():
 		var matched_arg = convert_type(args[i], types[i])
 		if matched_arg == null:
-			return null
+			return []
 		result.append(matched_arg)
 	return result
 
 
 func convert_type(input, type: int):
+	var acceptable_input_types:= [TYPE_BOOL, TYPE_INT, TYPE_FLOAT, TYPE_STRING, TYPE_VECTOR2, TYPE_NIL]
+	if !acceptable_input_types.has(input.typeof()): 
+		return null
 	return type_convert(input, type)
 
 
-func sort_string_array(input: Array, order: SortOrder):
+func sort_string_array(input: Array, order: SortOrder) -> Array:
 	var result = sort_packed_string_array(PackedStringArray(input), order)
 	return Array(result)
 
@@ -138,7 +139,7 @@ func sort_packed_string_array(input: Array, order: SortOrder = SortOrder.ASCENDI
 			return []
 
 
-func _stalin_sort_strings(input: Array):
+func _stalin_sort_strings(input: Array) -> Array:
 	var new_input = input.duplicate()
 	var i: int = 0
 	while i + 1 < new_input.size():
@@ -149,7 +150,7 @@ func _stalin_sort_strings(input: Array):
 	return new_input
 
 
-func sort_alphabetically_case_sensitive(list: Array, order: bool = true):
+func sort_alphabetically_case_sensitive(list: Array, order: bool = true)-> Array:
 	var sorted_list = list.duplicate()
 	sorted_list.sort()
 	if order == false:
@@ -157,7 +158,7 @@ func sort_alphabetically_case_sensitive(list: Array, order: bool = true):
 	return sorted_list
 
 
-func sort_resources_by_string(list: Array, property_name: String, order: SortOrder):
+func sort_resources_by_string(list: Array, property_name: String, order: SortOrder) -> Array:
 	var sorted_list = list.duplicate()
 	match order:
 		SortOrder.ASCENDING:
@@ -181,9 +182,11 @@ func sort_resources_by_string(list: Array, property_name: String, order: SortOrd
 				else:
 					i += 1
 			return sorted_list
+		_:
+			return []
 
 
-func sort_resources_by_string_var(list: Array, property_name: String, order:= true):
+func sort_resources_by_string_var(list: Array, property_name: String, order:= true) -> Array:
 	var sorted_list = list.duplicate()
 	if order == true:
 		sorted_list.sort_custom(func(a,b):
@@ -194,7 +197,8 @@ func sort_resources_by_string_var(list: Array, property_name: String, order:= tr
 			return a.get(property_name).casecmp_to(b.get(property_name)) > 0)
 		return sorted_list
 
-func colorize_text(text:String, color:Color):
+
+func colorize_text(text:String, color:Color) -> String:
 	var color_hex: String = color.to_html(false)
 	
 	var color_start := "[color="+color_hex+"]"

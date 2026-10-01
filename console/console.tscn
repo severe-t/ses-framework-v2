@@ -37,16 +37,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1979561953]
-clip_contents = true
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.7
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=258425497]
+[node name="MarginContainer" type="MarginContainer" parent="Control" unique_id=258425497]
+layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.7
@@ -58,14 +50,23 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=2050582184]
+[node name="ColorRect" type="ColorRect" parent="Control/MarginContainer" unique_id=1979561953]
+clip_contents = true
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer" unique_id=448243283]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/MarginContainer" unique_id=2050582184]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="TextField" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=548974599]
+[node name="TextField" type="RichTextLabel" parent="Control/MarginContainer/VBoxContainer2" unique_id=548974599]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
 focus_mode = 2
 theme_override_font_sizes/normal_font_size = 24
 theme_override_font_sizes/bold_font_size = 24
@@ -82,17 +83,7 @@ scroll_following = true
 scroll_following_visible_characters = true
 selection_enabled = true
 
-[node name="SuggestionPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=2141005562]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-
-[node name="SuggestionList" type="ItemList" parent="MarginContainer/VBoxContainer/SuggestionPanel" unique_id=967739519]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer" unique_id=114883547]
+[node name="LineEdit" type="LineEdit" parent="Control/MarginContainer/VBoxContainer2" unique_id=114883547]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
@@ -106,5 +97,23 @@ emoji_menu_enabled = false
 caret_blink = true
 caret_blink_interval = 0.25
 
-[connection signal="text_changed" from="MarginContainer/VBoxContainer/LineEdit" to="." method="_on_line_edit_text_changed"]
-[connection signal="text_submitted" from="MarginContainer/VBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[node name="MarginContainer2" type="MarginContainer" parent="Control" unique_id=736650587]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.7
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SuggestionContainer" type="PanelContainer" parent="Control/MarginContainer2" unique_id=868865687]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="SuggestionList" type="VBoxContainer" parent="Control/MarginContainer2/SuggestionContainer" unique_id=546009729]
+unique_name_in_owner = true
+layout_mode = 2
+
+[connection signal="text_changed" from="Control/MarginContainer/VBoxContainer2/LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="text_submitted" from="Control/MarginContainer/VBoxContainer2/LineEdit" to="." method="_on_line_edit_text_submitted"]

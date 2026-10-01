@@ -5,9 +5,9 @@ var source_id: String = "SesTelemetry"
 
 
 func out(source, color: Color = Color.WHITE, ...text: Array):
-	_out(source, color, text)
+	out_from_arr(source, color, text)
 
-func _out(source, color: Color = Color.WHITE, text: Array[String] = [""]):
+func out_from_arr(source, color: Color = Color.WHITE, text: Array = []):
 	if text.is_empty():
 		return
 	var source_name: String
@@ -22,8 +22,7 @@ func _out(source, color: Color = Color.WHITE, text: Array[String] = [""]):
 	var text_array:= [colorized_name, " ", "".join(text)] 
 	var final_print = "".join(text_array)
 	print_rich(final_print)
-	if Engine.has_singleton("Console"):
-		Ses.print_to_console(final_print)
+	return final_print
 
 
 func _colorize_text(text:String, color:Color):
